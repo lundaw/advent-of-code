@@ -10,12 +10,11 @@ class BaseDay:
     def __init__(self):
         self._parse_input()
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, *args, **kwargs) -> tuple[int, int]:
         part1 = self.run_part1()
-        print(f"First part: {part1}")
-
         part2 = self.run_part2()
-        print(f"Second part: {part2}")
+
+        return part1, part2
 
     @abstractmethod
     def _parse_input(self) -> None:
