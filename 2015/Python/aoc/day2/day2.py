@@ -9,7 +9,7 @@ class Day2(BaseDay):
         input_path = os.path.join(self.input_root_folder, "day2")
         with open(file=input_path, mode="r", encoding="utf-8") as input_file:
             self.input = [
-                BoxDimension(*map(lambda s: int(s), line.strip().split("x"))) for line in input_file.readlines()
+                BoxDimension(*map(lambda s: int(s), line.split("x"))) for line in input_file.read().splitlines()
             ]
 
     def run_part1(self) -> int:
