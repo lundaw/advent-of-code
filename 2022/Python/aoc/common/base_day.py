@@ -4,7 +4,7 @@ from abc import abstractmethod
 
 
 class BaseDay:
-    year: int = 2015
+    year: int = 2022
     input_root_folder = os.path.join(pathlib.Path(os.getcwd()).parents[2], "_inputs", str(year))
 
     def __init__(self):
