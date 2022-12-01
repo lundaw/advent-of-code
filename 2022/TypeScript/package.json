@@ -1,0 +1,22 @@
+{
+  "name": "lundaw-aoc-2022-typescript",
+  "version": "1.0.0",
+  "description": "Advent of Code 2022 TypeScript solutions",
+  "main": "out/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p .",
+    "all": "npm run build && node out/main.js"
+  },
+  "keywords": [
+    "aoc",
+    "advent-of-code",
+    "typescript"
+  ],
+  "author": "Lundaw",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.9.3",
+    "@types/node": "^18.11.10"
+  }
+}
