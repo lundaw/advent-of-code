@@ -51,7 +51,7 @@ class Day2(BaseDay):
         :param own: What you have chosen
         :return: Points for the round
         """
-        choice_points: int = 0
+        choice_points: int = -1
         match own:
             case "X":
                 choice_points = 1
@@ -59,9 +59,9 @@ class Day2(BaseDay):
                 choice_points = 2
             case "Z":
                 choice_points = 3
-        assert choice_points != 0
+        assert choice_points != -1
 
-        round_result_points: int
+        round_result_points: int = -1
         if (opponent == "A" and own == "X") or (opponent == "B" and own == "Y") or (opponent == "C" and own == "Z"):
             round_result_points = 3  # Draw
         elif (opponent == "A" and own == "Y") or (opponent == "B" and own == "Z") or (
@@ -69,5 +69,6 @@ class Day2(BaseDay):
             round_result_points = 6  # Win
         else:
             round_result_points = 0  # Loss
+        assert round_result_points != -1
 
         return choice_points + round_result_points
