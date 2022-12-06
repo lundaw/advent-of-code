@@ -5,7 +5,7 @@ export default function (): Array<number> {
     const input: Array<number> = new Array();
 
     function readInput(): void {
-        const inputPath = path.join(global.appRoot, "..", "..", "..", "_inputs", global.year.toString(), "day1");
+        const inputPath = path.join(global.inputRoot, "day1");
         const fileContent = fs.readFileSync(inputPath, "utf-8");
         const tempCalorieSum = new Array<number>();
 

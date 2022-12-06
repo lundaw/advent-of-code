@@ -1,8 +1,9 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-global.appRoot = path.dirname(fileURLToPath(import.meta.url));
 global.year = 2022;
+global.appRoot = path.dirname(fileURLToPath(import.meta.url));
+global.inputRoot = path.join(global.appRoot, "..", "..", "..", "_inputs", global.year.toString());
 
 console.log("---- Advent of Code 2022 TypeScript solutions")
 for(let i = 1; i <= 25; i++) {

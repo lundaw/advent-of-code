@@ -1,5 +1,6 @@
 declare module global {
     let appRoot: string;
+    let inputRoot: string;
     let year: number;
 }
 
