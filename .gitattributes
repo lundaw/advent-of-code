@@ -1,0 +1,6 @@
+*       eol=lf
+
+# Source code
+*.c     text diff=cpp
+*.h     text diff=cpp
+*.py	text diff=python
