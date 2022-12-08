@@ -34,17 +34,9 @@ class Day8(BaseDay):
             return True
 
         def is_visible(x: int, y: int) -> bool:
-            # Check if it is on the edge
-            if x == 0 or y == 0 or x == self.dimension or y == self.dimension:
-                return True
-
-            if search_vertical(x, y) or search_vertical(x, y, True):
-                return True
-
-            if search_horizontal(x, y) or search_horizontal(x, y, True):
-                return True
-
-            return False
+            return self._tree_on_edge(x, y) \
+                or search_vertical(x, y) or search_vertical(x, y, True) \
+                or search_horizontal(x, y) or search_horizontal(x, y, True)
 
         for x in range(0, self.dimension + 1):
             for y in range(0, self.dimension + 1):
@@ -55,7 +47,7 @@ class Day8(BaseDay):
 
     def run_part2(self) -> int:
         def calculate_scenic_score(x: int, y: int) -> int:
-            if x == 0 or x == self.dimension or y == 0 or y == self.dimension:
+            if self._tree_on_edge(x, y):
                 return 0
 
             # Look towards top
@@ -99,3 +91,6 @@ class Day8(BaseDay):
                 maximum_scenic_score = scenic_score
 
         return maximum_scenic_score
+
+    def _tree_on_edge(self, x: int, y: int):
+        return x == 0 or x == self.dimension or y == 0 or y == self.dimension
