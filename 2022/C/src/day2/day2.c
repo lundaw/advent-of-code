@@ -45,7 +45,7 @@ void day2(const char *input_root) {
     if (day2_parse_input(&container, input_path) != -1) {
         int result_p1 = day2_part1(&container);
         int result_p2 = day2_part2(&container);
-        printf("Day1: (%d, %d)\n", result_p1, result_p2);
+        printf("Day2: (%d, %d)\n", result_p1, result_p2);
     } else {
         fprintf(stderr, "Failed to read input file for day 1!");
     }
@@ -86,102 +86,49 @@ int day2_parse_input(MatchupsContainer *container, const char *input_path) {
     return 0;
 }
 
+int calculate_score_part1(const char *matchup) {
+    if (strcmp("A X", matchup) == 0) return 1 + 3;
+    if (strcmp("A Y", matchup) == 0) return 2 + 6;
+    if (strcmp("A Z", matchup) == 0) return 3 + 0;
+
+    if (strcmp("B X", matchup) == 0) return 1 + 0;
+    if (strcmp("B Y", matchup) == 0) return 2 + 3;
+    if (strcmp("B Z", matchup) == 0) return 3 + 6;
+
+    if (strcmp("C X", matchup) == 0) return 1 + 6;
+    if (strcmp("C Y", matchup) == 0) return 2 + 0;
+    if (strcmp("C Z", matchup) == 0) return 3 + 3;
+}
+
 int day2_part1(const MatchupsContainer *container) {
     size_t total_score = 0;
 
     for (size_t i = 0; i < container->size; i++) {
-        char *matchup = container->matchups[i];
-        char opponent = matchup[0];
-        char myself = matchup[2];
-
-        if (opponent == 'A') {
-            if (myself == 'X') {
-                total_score += 1 + 3;
-            }
-            else if (myself == 'Y') {
-                total_score += 2 + 6;
-            }
-            else {
-                total_score += 3 + 0;
-            }
-        }
-        else if (opponent == 'B') {
-            if (myself == 'X') {
-                total_score += 1 + 0;
-            }
-            else if (myself == 'Y') {
-                total_score += 2 + 3;
-            }
-            else {
-                total_score += 3 + 6;
-            }
-        }
-        else {
-            if (myself == 'X') {
-                total_score += 1 + 6;
-            }
-            else if (myself == 'Y') {
-                total_score += 2 + 0;
-            }
-            else {
-                total_score += 3 + 3;
-            }
-        }
+        total_score += calculate_score_part1(container->matchups[i]);
     }
 
     return total_score;
+}
+
+int calculate_score_part2(const char *matchup) {
+    if (strcmp("A X", matchup) == 0) return 3 + 0;
+    if (strcmp("A Y", matchup) == 0) return 1 + 3;
+    if (strcmp("A Z", matchup) == 0) return 2 + 6;
+
+    if (strcmp("B X", matchup) == 0) return 1 + 0;
+    if (strcmp("B Y", matchup) == 0) return 2 + 3;
+    if (strcmp("B Z", matchup) == 0) return 3 + 6;
+
+    if (strcmp("C X", matchup) == 0) return 2 + 0;
+    if (strcmp("C Y", matchup) == 0) return 3 + 3;
+    if (strcmp("C Z", matchup) == 0) return 1 + 6;
 }
 
 int day2_part2(const MatchupsContainer *container) {
     size_t total_score = 0;
 
     for (size_t i = 0; i < container->size; i++) {
-        char *matchup = container->matchups[i];
-        char opponent = matchup[0];
-        char result = matchup[2];
-
-        if (opponent == 'A') {
-            if (result == 'X') {
-                // Rock vs scissors, loss
-                total_score += 3 + 0;
-            }
-            else if (result == 'Y') {
-                // Rock vs rock, draw
-                total_score += 1 + 3;
-            }
-            else {
-                // Rock vs paper, win
-                total_score += 2 + 6;
-            }
-        }
-        else if (opponent == 'B') {
-            if (result == 'X') {
-                // Paper vs rock, loss
-                total_score += 1 + 0;
-            }
-            else if (result == 'Y') {
-                // Paper vs paper, draw
-                total_score += 2 + 3;
-            }
-            else {
-                // Paper vs scissors, win
-                total_score += 3 + 6;
-            }
-        }
-        else {
-            if (result == 'X') {
-                // Scissors vs paper
-                total_score += 2 + 0;
-            }
-            else if (result == 'Y') {
-                // Scissors vs scissors, draw
-                total_score += 3 + 3;
-            }
-            else {
-                // Scissors vs rock, win
-                total_score += 1 + 6;
-            }
-        }
+        total_score += calculate_score_part2(container->matchups[i]);
     }
 
     return total_score;
