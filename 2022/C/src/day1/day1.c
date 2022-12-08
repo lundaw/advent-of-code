@@ -20,9 +20,10 @@ int part2(const ElfGroupContainer *container);
 #pragma endregion
 
 void day1(const char *input_root) {
-    char *input_path = (char *)malloc(strlen(input_root) + strlen("day1") + 1);
+    const char *day = "day1";
+    char *input_path = (char *)malloc(strlen(input_root) + strlen(day) + 1);
     strcpy(input_path, input_root);
-    strcat(input_path, "day1");
+    strcat(input_path, day);
 
     ElfGroupContainer container = {.groups = NULL, .size = 0};
     if (parse_input(&container, input_path) != -1) {
