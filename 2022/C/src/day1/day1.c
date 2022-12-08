@@ -1,5 +1,7 @@
 #include "day1.h"
 
+#include "../common/utils.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -69,23 +71,22 @@ int parse_input(ElfGroupContainer *container, const char *input_path) {
     }
 
     // Sort group calories into descending order
-    for (int i = 0; i < container->size; i++) {
-        for (int j = i + 1; j < container->size; j++) {
-            if (container->groups[i] < container->groups[j]) {
-                int temp = container->groups[j];
-                container->groups[j] = container->groups[i];
-                container->groups[i] = temp;
-            }
-        }
-    }
+    // for (int i = 0; i < container->size; i++) {
+    //     for (int j = i + 1; j < container->size; j++) {
+    //         if (container->groups[i] < container->groups[j]) {
+    //             int temp = container->groups[j];
+    //             container->groups[j] = container->groups[i];
+    //             container->groups[i] = temp;
+    //         }
+    //     }
+    // }
+    sort_int_array(container->groups, container->size);
 
     fclose(fp);
     return 0;
 }
 
-int part1(const ElfGroupContainer *container) {
-    return container->groups[0];
-}
+int part1(const ElfGroupContainer *container) { return container->groups[0]; }
 
 int part2(const ElfGroupContainer *container) {
     return container->groups[0] + container->groups[1] + container->groups[2];
