@@ -70,16 +70,6 @@ int parse_input(ElfGroupContainer *container, const char *input_path) {
         current_group += atoi(line);
     }
 
-    // Sort group calories into descending order
-    // for (int i = 0; i < container->size; i++) {
-    //     for (int j = i + 1; j < container->size; j++) {
-    //         if (container->groups[i] < container->groups[j]) {
-    //             int temp = container->groups[j];
-    //             container->groups[j] = container->groups[i];
-    //             container->groups[i] = temp;
-    //         }
-    //     }
-    // }
     sort_int_array(container->groups, container->size);
 
     fclose(fp);
