@@ -34,6 +34,7 @@ void day1(const char *input_root) {
         fprintf(stderr, "Failed to read input file for day 1!");
     }
 
+    free(container.groups);
     free(input_path);
 }
 
