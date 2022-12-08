@@ -13,9 +13,9 @@ typedef struct ElfGroupContainer {
 
 #pragma region Forward declarations
 
-int parse_input(ElfGroupContainer *container, const char *input_path);
-int part1(const ElfGroupContainer *container);
-int part2(const ElfGroupContainer *container);
+int day1_parse_input(ElfGroupContainer *container, const char *input_path);
+int day1_part1(const ElfGroupContainer *container);
+int day1_part2(const ElfGroupContainer *container);
 
 #pragma endregion
 
@@ -26,9 +26,9 @@ void day1(const char *input_root) {
     strcat(input_path, day);
 
     ElfGroupContainer container = {.groups = NULL, .size = 0};
-    if (parse_input(&container, input_path) != -1) {
-        int result_p1 = part1(&container);
-        int result_p2 = part2(&container);
+    if (day1_parse_input(&container, input_path) != -1) {
+        int result_p1 = day1_part1(&container);
+        int result_p2 = day1_part2(&container);
         printf("Day1: (%d, %d)\n", result_p1, result_p2);
     } else {
         fprintf(stderr, "Failed to read input file for day 1!");
@@ -38,7 +38,7 @@ void day1(const char *input_root) {
     free(input_path);
 }
 
-int parse_input(ElfGroupContainer *container, const char *input_path) {
+int day1_parse_input(ElfGroupContainer *container, const char *input_path) {
     FILE *fp;
     char *line = NULL;
     size_t len = 0;
@@ -78,8 +78,8 @@ int parse_input(ElfGroupContainer *container, const char *input_path) {
     return 0;
 }
 
-int part1(const ElfGroupContainer *container) { return container->groups[0]; }
+int day1_part1(const ElfGroupContainer *container) { return container->groups[0]; }
 
-int part2(const ElfGroupContainer *container) {
+int day1_part2(const ElfGroupContainer *container) {
     return container->groups[0] + container->groups[1] + container->groups[2];
 }
