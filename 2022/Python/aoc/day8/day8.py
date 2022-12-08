@@ -15,40 +15,36 @@ class Day8(BaseDay):
                 self.input.append([int(height) for height in line])
 
     def run_part1(self) -> int:
+        def search_vertical(x: int, y: int, top_to_bottom: bool = False) -> bool:
+            start = 0 if top_to_bottom else self.dimension
+            step = 1 if top_to_bottom else -1
+            for analyzed_y in range(start, y, step):
+                if self.input[analyzed_y][x] >= self.input[y][x]:
+                    return False
+
+            return True
+
+        def search_horizontal(x: int, y: int, left_to_right: bool = False) -> bool:
+            start = 0 if left_to_right else self.dimension
+            step = 1 if left_to_right else -1
+            for analyzed_x in range(start, x, step):
+                if self.input[y][analyzed_x] >= self.input[y][x]:
+                    return False
+
+            return True
+
         def is_visible(x: int, y: int) -> bool:
             # Check if it is on the edge
             if x == 0 or y == 0 or x == self.dimension or y == self.dimension:
                 return True
 
-            # Search from top
-            top_visible = True
-            for analyzed_y in range(0, y, 1):
-                if self.input[analyzed_y][x] >= self.input[y][x]:
-                    top_visible = False
-                    break
+            if search_vertical(x, y) or search_vertical(x, y, True):
+                return True
 
-            # Search from bottom
-            bottom_visible = True
-            for analyzed_y in range(self.dimension, y, -1):
-                if self.input[analyzed_y][x] >= self.input[y][x]:
-                    bottom_visible = False
-                    break
+            if search_horizontal(x, y) or search_horizontal(x, y, True):
+                return True
 
-            # Search from left
-            left_visible = True
-            for analyzed_x in range(0, x, 1):
-                if self.input[y][analyzed_x] >= self.input[y][x]:
-                    left_visible = False
-                    break
-
-            # Search from right
-            right_visible = True
-            for analyzed_x in range(self.dimension, x, -1):
-                if self.input[y][analyzed_x] >= self.input[y][x]:
-                    right_visible = False
-                    break
-
-            return top_visible or bottom_visible or left_visible or right_visible
+            return False
 
         for x in range(0, self.dimension + 1):
             for y in range(0, self.dimension + 1):
