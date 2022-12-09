@@ -1,7 +1,7 @@
 import os.path
 
 from common.base_day import BaseDay
-from day9.position import Position
+from day9.snake import Snake
 
 
 class Day9(BaseDay):
@@ -14,30 +14,21 @@ class Day9(BaseDay):
                 self.input.append((direction, int(step)))
 
     def run_part1(self) -> int:
-        pos_head = Position(0, 0)
-        pos_tail = Position(0, 0)
+        snake: Snake = Snake(1)
         visited_positions: set[tuple[int, int]] = set()
 
         for direction, step in self.input:
-            for _ in range(0, step):
-                previous_pos_head = Position(pos_head.x, pos_head.y)
+            visited = snake.step(direction, step)
+            visited_positions = visited_positions.union(visited)
 
-                match direction:
-                    case "R":
-                        pos_head.x += 1
-                    case "L":
-                        pos_head.x -= 1
-                    case "U":
-                        pos_head.y += 1
-                    case "D":
-                        pos_head.y -= 1
-
-                if abs(pos_head.x - pos_tail.x) > 1 or abs(pos_head.y - pos_tail.y) > 1:
-                    pos_tail = previous_pos_head
-                    visited_positions.add((pos_tail.x, pos_tail.y))
-
-        # Adding plus one for the start position
-        return len(visited_positions) + 1
+        return len(visited_positions)
 
     def run_part2(self) -> int:
-        pass
+        snake = Snake(10)
+        visited_positions: set[tuple[int, int]] = set()
+
+        for direction, step in self.input:
+            visited = snake.step(direction, step)
+            visited_positions = visited_positions.union(visited)
+
+        return len(visited_positions)
