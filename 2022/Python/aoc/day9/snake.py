@@ -19,6 +19,9 @@ class Snake:
             self._move_position(head, direction)
 
             for pair_head, pair_tail in self.parts:
+                if pair_head.x == pair_tail.x and pair_head.y == pair_tail.y:
+                    break
+
                 self._move_tail_closer(pair_head, pair_tail)
 
             last_head, last_tail = self.parts[-1]
