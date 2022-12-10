@@ -18,8 +18,7 @@ class Day9(BaseDay):
         visited_positions: set[tuple[int, int]] = set()
 
         for direction, step in self.input:
-            visited = snake.step(direction, step)
-            visited_positions = visited_positions.union(visited)
+            visited_positions |= snake.step(direction, step)
 
         return len(visited_positions)
 
@@ -28,7 +27,6 @@ class Day9(BaseDay):
         visited_positions: set[tuple[int, int]] = set()
 
         for direction, step in self.input:
-            visited = snake.step(direction, step)
-            visited_positions = visited_positions.union(visited)
+            visited_positions |= snake.step(direction, step)
 
         return len(visited_positions)
