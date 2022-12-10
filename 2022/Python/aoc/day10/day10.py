@@ -43,11 +43,11 @@ class Day10(BaseDay):
         for instruction, value in self.input:
             if instruction == "addx":
                 for _ in range(2):
-                    crt_pixels.append("#" if abs(cycle_counter % 40 - register) <= 1 else ".")
+                    crt_pixels.append("#" if abs(cycle_counter % 40 - register) <= 1 else " ")
                     cycle_counter += 1
                 register += value
             elif instruction == "noop":
-                crt_pixels.append("#" if abs(cycle_counter % 40 - register) <= 1 else ".")
+                crt_pixels.append("#" if abs(cycle_counter % 40 - register) <= 1 else " ")
                 cycle_counter += 1
             else:
                 raise RuntimeError("Unknown operation type")
