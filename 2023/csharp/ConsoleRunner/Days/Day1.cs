@@ -4,24 +4,16 @@ public sealed class Day1 : DayBase
 {
     private readonly string[] _lines;
 
-    public Day1() => _lines = File.ReadAllLines("Inputs/day1.txt");
+    public Day1()
+    {
+        _lines = File.ReadAllLines("Inputs/day1.txt");
+    }
 
-    public override (long Part1, long Part2) Calculate() => (Part1(), Part2());
-
-    // private long Part1(in string[] input) =>
-    //     input.Select(l =>
-    //         {
-    //             char[] digits = l.Where(char.IsDigit).ToArray();
-    //             
-    //             return digits.Length == 0 ? 0 : int.Parse($"{digits.First()}{digits.Last()}");
-    //         })
-    //         .Sum(n => n);
-
-    private long Part1() => _lines
+    protected override long Part1() => _lines
         .Select(l => l.Where(char.IsDigit).ToArray())
         .Sum(d => d.Length > 0 ? int.Parse($"{d.First()}{d.Last()}") : 0);
 
-    private long Part2() => _lines.Select(GetNumberFromMixedFormat).Sum(n => n);
+    protected override long Part2() => _lines.Select(GetNumberFromMixedFormat).Sum(n => n);
 
     private static int GetNumberFromMixedFormat(string number)
     {
